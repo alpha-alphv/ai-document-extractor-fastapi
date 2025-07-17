@@ -1,0 +1,10 @@
+2025-07-14 16:24:58,886 - INFO - Started processing file: 27564-LO (1).pdf
+2025-07-14 16:26:09,292 - INFO - PDF identified as image-based: 27564-LO (1).pdf
+2025-07-14 16:26:09,293 - INFO - Starting Markdown conversion for text of length: 78793
+2025-07-14 16:26:09,760 - INFO - Markdown conversion successful for: 27564-LO (1).pdf
+2025-07-14 16:26:09,760 - INFO - Completed processing 27564-LO (1).pdf in 70.87 seconds
+2025-07-14 16:33:03,059 - INFO - Started processing file: 27564-LO (1).pdf
+2025-07-14 16:34:13,471 - INFO - PDF identified as image-based: 27564-LO (1).pdf
+2025-07-14 16:34:13,471 - INFO - Starting Markdown conversion for text of length: 78793
+2025-07-14 16:34:14,021 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 413 Payload Too Large"
+2025-07-14 16:34:14,022 - ERROR - Error processing file 27564-LO (1).pdf: Error code: 413 - {'error': {'message': 'Request too large for model `llama3-70b-8192` in organization `org_01k03yt6vsf5xb4r436433t4f6` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Requested 19793, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}
