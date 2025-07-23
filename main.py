@@ -7,9 +7,12 @@ from fastapi.responses import JSONResponse
 from utils.logger import logger
 from datetime import datetime
 
+# Import Helper Utils
+from utils.file_utils import is_pdf_text_based
+
 # Import Agents
 from agents.llm_extract import extract_with_rag
-from agents.preprocess import is_pdf_text_based, extract_text_pdf, extract_text_ocr
+from agents.preprocess import extract_text_pdf, extract_text_ocr
 
 app = FastAPI()
 

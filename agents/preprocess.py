@@ -5,14 +5,6 @@ from pdf2image import convert_from_bytes
 # Set OCR languages (English + Malay)
 OCR_LANG = "eng+msa"
 
-# 🔐 Helper: Check if PDF is text-based or image-based
-def is_pdf_text_based(file_bytes: bytes) -> bool:
-    with pymupdf.open(stream=file_bytes, filetype="pdf") as doc:
-        for page in doc:
-            if page.get_text().strip():
-                return True
-    return False
-
 # 🔐 Extract text from text-based PDF
 def extract_text_pdf(file_bytes: bytes) -> str:
     text = ""
