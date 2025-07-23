@@ -1,50 +1,19 @@
-# 📦 Unified Agentic Document Extractor API
+# Unified Agentic Document Extractor API
 # Handles text-based and image-based PDFs, processes them, and sends to LLM for Markdown output
 
+import uvicorn
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
-import pymupdf  # PyMuPDF
-import pytesseract
-from pdf2image import convert_from_bytes
-from agents.llm_extract import extract_with_rag
 from utils.logger import logger
 from datetime import datetime
 
+# Import Agents
+from agents.llm_extract import extract_with_rag
+from agents.preprocess import is_pdf_text_based, extract_text_pdf, extract_text_ocr
+
 app = FastAPI()
 
-# Set OCR languages (English + Malay)
-OCR_LANG = "eng+msa"
-
-# 🔐 Helper: Check if PDF is text-based or image-based
-def is_pdf_text_based(file_bytes: bytes) -> bool:
-    with pymupdf.open(stream=file_bytes, filetype="pdf") as doc:
-        for page in doc:
-            if page.get_text().strip():
-                return True
-    return False
-
-# 🔐 Extract text from text-based PDF
-def extract_text_pdf(file_bytes: bytes) -> str:
-    text = ""
-    with pymupdf.open(stream=file_bytes, filetype="pdf") as doc:
-        for page in doc:
-            text += page.get_text()
-    return text
-
-# 🔐 Extract text using OCR from image-based PDF (multi-language)
-def extract_text_ocr(file_bytes: bytes) -> str:
-    text = ""
-    images = convert_from_bytes(file_bytes)
-    # Log Total Pages
-    print(f"Total pages to process: {len(images)}")
-
-    for image in images:
-        # Log Loop Iteration
-        print(f"Processing image {images.index(image) + 1} of {len(images)}")
-        text += pytesseract.image_to_string(image, lang=OCR_LANG)
-    return text
-
-# 🚀 Unified Endpoint
+# Extract Markdown from PDF
 @app.post("/extract")
 async def extract_markdown_from_pdf(file: UploadFile = File(...)):
     file_bytes = await file.read()
@@ -79,3 +48,6 @@ async def extract_markdown_from_pdf(file: UploadFile = File(...)):
     except Exception as e:
         logger.error(f"Error processing file {file.filename}: {e}")
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+if __name__ == '__main__':
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8080, reload=True, log_level="debug")
