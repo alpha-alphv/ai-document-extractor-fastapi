@@ -1,3 +1,5 @@
+structured_fields.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -6,7 +8,7 @@ __pycache__/
 
 # logs
 logs/
-*.log
+app.log
 
 # C extensions
 *.so
@@ -109,3 +111,4 @@ venv.bak/
 .mypy_cache/
 
 .idea/*
+logs/app.log
