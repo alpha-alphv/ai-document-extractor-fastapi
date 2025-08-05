@@ -11,7 +11,7 @@ import json
 
 # Import Agents
 from agents.llm_extract import extract_with_rag
-from agents.preprocess import extract_text_ocr, pdf_to_images
+from agents.preprocess import extract_text_ocr, pdf_to_images, filter_bank_copy
 from agents.vlm_agent import smart_scan
 
 app = FastAPI()
@@ -73,8 +73,11 @@ async def extract_markdown_VLM(file: UploadFile = File(...)):
         num_images = pdf_to_images(file_bytes, image_path)
         logger.info(f"Number of Images Converted: {num_images}")
 
+        # Filter bank copy
+        filter_bank_copy(image_path)
+
         # VLM Processing
-        extracted_info = smart_scan(num_images)
+        extracted_info = smart_scan()
 
         #  Delete image after processing
         try:
