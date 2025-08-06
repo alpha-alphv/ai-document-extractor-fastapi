@@ -17,49 +17,49 @@ from app.agents.vlm_agent import smart_scan
 app = FastAPI()
 
 # Extract Markdown from PDF using RAG
-@app.post("/extract")
-async def extract_markdown_from_pdf(file: UploadFile = File(...)):
-    file_bytes = await file.read()
-    start_time = datetime.now()
-    logger.info(f"Started processing file: {file.filename}")
-    try:
-        extracted_text = extract_text_ocr(file_bytes)
-        logger.info(f"PDF identified as image-based: {file.filename}")
+# @app.post("/extract")
+# async def extract_markdown_from_pdf(file: UploadFile = File(...)):
+#     file_bytes = await file.read()
+#     start_time = datetime.now()
+#     logger.info(f"Started processing file: {file.filename}")
+#     try:
+#         extracted_text = extract_text_ocr(file_bytes)
+#         logger.info(f"PDF identified as image-based: {file.filename}")
 
-        fields = [
-            "date",
-            "borrower_name",
-            "borrower_registration_number",
-            "borrower_address",
-            "bank_name",
-            "bank_address",
-            "bank_registration_number",
-            "subject of FA",
-            "total_loan_amount",
-            "gurantor_name",
-            "gurantor_nric",
-            "coporate_gurantor_name",
-            "coporate_gurantor_registration_number",
-            "coporate_gurantor_address",
-            "law_firm_name",
-            "law_firm_address",
-        ]
+#         fields = [
+#             "date",
+#             "borrower_name",
+#             "borrower_registration_number",
+#             "borrower_address",
+#             "bank_name",
+#             "bank_address",
+#             "bank_registration_number",
+#             "subject of FA",
+#             "total_loan_amount",
+#             "gurantor_name",
+#             "gurantor_nric",
+#             "coporate_gurantor_name",
+#             "coporate_gurantor_registration_number",
+#             "coporate_gurantor_address",
+#             "law_firm_name",
+#             "law_firm_address",
+#         ]
 
-        query = "Extract " + ", ".join(fields)
-        targeted_variables = ", ".join(fields)
+#         query = "Extract " + ", ".join(fields)
+#         targeted_variables = ", ".join(fields)
 
-        markdown = extract_with_rag(extracted_text, query, targeted_variables)
-        logger.info(f"Markdown conversion successful for: {file.filename}")
+#         markdown = extract_with_rag(extracted_text, query, targeted_variables)
+#         logger.info(f"Markdown conversion successful for: {file.filename}")
 
-        end_time = datetime.now()
-        elapsed_time = (end_time - start_time).total_seconds()
-        logger.info(f"Completed processing {file.filename} in {elapsed_time:.2f} seconds")
+#         end_time = datetime.now()
+#         elapsed_time = (end_time - start_time).total_seconds()
+#         logger.info(f"Completed processing {file.filename} in {elapsed_time:.2f} seconds")
 
-        return markdown
+#         return markdown
 
-    except Exception as e:
-        logger.error(f"Error processing file {file.filename}: {e}")
-        return JSONResponse(status_code=500, content={"error": str(e)})
+#     except Exception as e:
+#         logger.error(f"Error processing file {file.filename}: {e}")
+#         return JSONResponse(status_code=500, content={"error": str(e)})
 
 # Extract Markdown from PDF using VLM
 @app.post("/extract-vlm")
