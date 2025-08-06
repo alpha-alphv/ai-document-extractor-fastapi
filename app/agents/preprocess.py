@@ -4,8 +4,6 @@ from pdf2image import convert_from_bytes
 import os
 import shutil
 
-from utils import logger
-
 # Set OCR languages (English + Malay)
 OCR_LANG = "eng+msa"
 

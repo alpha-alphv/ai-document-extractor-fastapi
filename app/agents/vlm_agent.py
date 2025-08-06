@@ -2,10 +2,10 @@ import base64
 import os
 import json
 import ollama
-from utils.logger import logger
-from utils.file_utils import safe_json_parse, merge_dicts
-from agents.agent_config import get_bank_name, page_fields_mapping
-from agents.preprocess import filter_and_rename_pages
+from app.utils.logger import logger
+from app.utils.file_utils import safe_json_parse, merge_dicts
+from app.agents.agent_config import get_bank_name, page_fields_mapping
+from app.agents.preprocess import filter_and_rename_pages
 import re
 
 # List of fields to extract

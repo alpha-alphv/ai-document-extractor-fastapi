@@ -1,4 +1,4 @@
-from utils.logger import logger
+from app.utils.logger import logger
 import ollama
 import base64
 import os

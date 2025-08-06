@@ -4,15 +4,15 @@
 import uvicorn
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
-from utils.logger import logger
+from app.utils.logger import logger
 from datetime import datetime
 import shutil
 import json
 
 # Import Agents
-from agents.llm_extract import extract_with_rag
-from agents.preprocess import extract_text_ocr, pdf_to_images, filter_bank_copy
-from agents.vlm_agent import smart_scan
+from app.agents.llm_extract import extract_with_rag
+from app.agents.preprocess import extract_text_ocr, pdf_to_images, filter_bank_copy
+from app.agents.vlm_agent import smart_scan
 
 app = FastAPI()
 
