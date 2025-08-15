@@ -91,7 +91,35 @@ async def extract_markdown_VLM(file: UploadFile = File(...)):
         elapsed_time = (end_time - start_time).total_seconds()
         logger.info(f"Completed processing {file.filename} in {elapsed_time:.2f} seconds")
 
-        return json.dumps(extracted_info, indent=2)
+        # Format the extracted information
+        formatted_info = {
+            "ref_no": extracted_info.get("ref_no", ""),
+            "date": extracted_info.get("date", ""),
+            "open_date": extracted_info.get("open_date", ""),
+            "close_date": extracted_info.get("close_date", ""),
+            "borrower_name": extracted_info.get("borrower_name", ""),
+            "borrower_registration_number": extracted_info.get("borrower_registration_number", ""),
+            "borrower_address": extracted_info.get("borrower_address", ""),
+            "bank_name": extracted_info.get("bank_name", ""),
+            "bank_address": extracted_info.get("bank_address", ""),
+            "bank_registration_number": extracted_info.get("bank_registration_number", ""),
+            "subject_matter": extracted_info.get("subject_of_FA", ""),
+            "total_loan_amount": extracted_info.get("total_loan_amount", ""),
+            "gurantor_name": extracted_info.get("gurantor_name", ""),
+            "gurantor_nric": extracted_info.get("gurantor_nric", ""),
+            "coporate_gurantor_name": extracted_info.get("coporate_gurantor_name", ""),
+            "coporate_gurantor_registration_number": extracted_info.get("coporate_gurantor_registration_number", ""),
+            "law_firm_name": extracted_info.get("law_firm_name", ""),
+            "law_firm_address": extracted_info.get("law_firm_address", ""),
+            "property_description": extracted_info.get("property_title", ""),
+            "property_address": extracted_info.get("property_address", ""),
+            "property_price": extracted_info.get("property_price", "")
+        }
+
+        with open("structured_fields.json", "w") as f:
+            json.dump(formatted_info, f, indent=2)
+        logger.info("Final merged result saved to structured_fields.json")
+        return json.dumps(formatted_info, indent=2)
 
     except Exception as e:
         logger.error(f"Error processing file {file.filename}: {e}")

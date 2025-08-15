@@ -155,7 +155,4 @@ def smart_scan():
 
     print(per_page_results)
     final_result = merge_dicts(per_page_results)
-    with open("structured_fields.json", "w") as f:
-        json.dump(final_result, f, indent=2)
-    logger.info("Final merged result saved to structured_fields.json")
     return final_result

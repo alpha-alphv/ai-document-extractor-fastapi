@@ -70,6 +70,42 @@ def page_fields_mapping(bank_name: str):
                 "property_details": ["property_title", "property_address"]
             },
             "stamp_required": False
+        },
+        "MAYBANK BERHAD": {
+            "page_fields_map": {
+                "bank_copy": ["date", "borrower_name", "borrower_registration_number", "borrower_address",
+                              "bank_name", "bank_address", "bank_registration_number"],
+                "law_firm_details": ["law_firm_name", "law_firm_address"],
+                "subject_of_fa": ["subject_of_FA", "total_loan_amount"],
+                "guarantor_details": ["guarantor_name", "guarantor_nric",
+                                      "corporate_guarantor_name", "corporate_guarantor_registration_number"],
+                "property_details": ["property_title", "property_address"]
+            },
+            "stamp_required": False
+        },
+        "RHB BANK BERHAD": {
+            "page_fields_map": {
+                "bank_copy": ["date", "borrower_name", "borrower_registration_number", "borrower_address",
+                              "bank_name", "bank_address", "bank_registration_number"],
+                "law_firm_details": ["law_firm_name", "law_firm_address"],
+                "subject_of_fa": ["subject_of_FA", "total_loan_amount"],
+                "guarantor_details": ["guarantor_name", "guarantor_nric",
+                                      "corporate_guarantor_name", "corporate_guarantor_registration_number"],
+                "property_details": ["property_title", "property_address"]
+            },
+            "stamp_required": False
+        },
+        "PUBLIC BANK BERHAD": {
+            "page_fields_map": {
+                "bank_copy": ["date", "borrower_name", "borrower_registration_number", "borrower_address",
+                              "bank_name", "bank_address", "bank_registration_number"],
+                "law_firm_details": ["law_firm_name", "law_firm_address"],
+                "subject_of_fa": ["subject_of_FA", "total_loan_amount"],
+                "guarantor_details": ["guarantor_name", "guarantor_nric",
+                                      "corporate_guarantor_name", "corporate_guarantor_registration_number"],
+                "property_details": ["property_title", "property_address"]
+            },
+            "stamp_required": False
         }
     }
     targeted_bank = bank_field_mappings.get(bank_name.upper())
